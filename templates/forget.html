@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Signup
+{% endblock %}
+  
+
+{% block header_content %}
+<header>
+    <div class="header">
+       <div class="headers" id="headersx">
+           <div class="logo">
+            <a href="{{ url_for('home') }}"><li >
+                <img src="{{ url_for('static', filename='image/Logo (2).svg') }}" alt="logo">
+              </li></a>           </div>
+           <div class="list" id="list">
+               <ul id="act">
+                   <a href="{{ url_for('home') }}"><li >Home</li></a>
+                   <a href="{{ url_for('post') }}"><li>Post</li></a>
+                   <a href="{{ url_for('contact') }}"><li>Contact</li></a>
+                   {% if current_user.is_authenticated %}
+                   <a href="{{ url_for('logout') }}" class="login" id="login">Logout</a>
+               {% else %}
+                   <a href="{{ url_for('login') }}" class="login" id="login">Login</a>
+               {% endif %}                   </ul>
+               <div class="listbtn">
+                <button id="imglistNew" class="llx">=</button>
+               </div>
+           </div>
+       </div>
+    </div>
+
+</header>
+
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<main class="login">
+   
+    
+    <div class="containerz">
+     
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="flash-message {{ 'success' if 'Comment deleted successfully' in message else 'error' }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+    
+        <h1 class="login-title">Forget Password</h1>
+        <form action="{{ url_for('forget') }}" method="POST" class="login-form" id="login-form">
+            <label for="username" class="login-label">Email:</label>
+            <input type="text" id="username" name="email" required class="login-input">
+            <br>
+            <input type="submit" value="Send" class="login-button">
+        </form>
+
+       
+
+        <p class="sign-up-link">I have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+
+</main>
+
+{% endblock %}
